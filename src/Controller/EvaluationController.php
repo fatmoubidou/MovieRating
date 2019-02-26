@@ -6,30 +6,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Evaluation;
 use App\Entity\Movie;
+use App\Entity\User;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * Require ROLE_ADMIN for *every* controller method in this class.
+ *
+ * @Route("/evaluation")
+ */
 class EvaluationController extends AbstractController
 {
     /**
-     * @Route("/evaluation", name="evaluation")
+     * @Route("/evaluation/{id}", name="evaluation", requirements={"id"="\d+"})
+     * @IsGranted("ROLE_ADMIN")
+     *
      */
-    public function index()
+    public function rate(Movie $movie, Request $request)
     {
-        return $this->render('evaluation/index.html.twig', [
-            'controller_name' => 'EvaluationController',
-        ]);
-    }
+        $evaluation = new Evaluation();
 
-    /**
-     * @Route("/evaluation/{id}", name="evaluation")
-     * @Isgranted("ROLE_ADMIN")
-     */
-    public function rate(Movie $b, Request $c)
-    {
-        $d = new Evaluation();
-
-        $form = $this->createFormBuilder($d)
+        $form = $this->createFormBuilder($evaluation)
             ->add('comment')
             ->add('grade')
             ->add('save', SubmitType::class)
@@ -38,16 +36,22 @@ class EvaluationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-          $d.setMovie($b);
-          $d.setUser($u);
+          // to make sure the user is authenticated first
+          $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+          // returns User object, or null if the user is not authenticated
+          $user = $this->getUser();
+
+          $evaluation->setMovie($movie);
+          $evaluation->setUser($user);
           $entityManager = $this->getDoctrine()->getManager();
-          $entityManager->persist($d);
+          $entityManager->persist($evaluation);
           $entityManager->flush();
         }
 
         return $this->render('movie/evaluation.html.twig', [
-          "b" => $b,
-          "form" => $form->createView()
+          'movie' => $movie,
+          'form' => $form->createView()
         ]);
     }
 }

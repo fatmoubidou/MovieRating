@@ -2,7 +2,7 @@
 
 {% block title %}{{ movie.title }}{% endblock %}
 
-{% block pageTitle %}<h2>{{ movie.title }}</h2>{% endblock %}
+{% block pageTitle %}{{ movie.title }}{% endblock %}
 
 {% block main %}
 <div class="row">
@@ -31,6 +31,7 @@
           </div>
         </div>
       </div>
+      <a href="{{path('evaluation', {'id': movie.id})}}">Evaluer</a>
     </div>
 
   </div>

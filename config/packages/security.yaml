@@ -21,7 +21,8 @@ security:
                     - App\Security\LoginFormAuthenticator
             logout:
                 path: logout
-
+                # where to redirect after logout
+                target: /
 
             # activate different ways to authenticate
 

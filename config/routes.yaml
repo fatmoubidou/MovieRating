@@ -2,5 +2,5 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-app_logout:
+logout:
     path: /logout
