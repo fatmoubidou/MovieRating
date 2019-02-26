@@ -36,9 +36,9 @@ class MovieController extends AbstractController
      */
     public function index()
     {
-        $ms = $this->getDoctrine()->getRepository(Movie::class)->findAll();
+        $movies = $this->getDoctrine()->getRepository(Movie::class)->findAll();
         return $this->render('index.html.twig', [
-          "ms" => $ms
+          "movies" => $movies
         ]);
     }
 

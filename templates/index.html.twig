@@ -3,20 +3,20 @@
 {% block pageTitle %}<h2>Tous les films</h2>{% endblock %}
 {% block main %}
 <div class="row">
-      {% for m in ms %}
+      {% for movie in movies %}
       <div class="col-md-4">
             <div class="card mb-3">
-              <h3 class="card-header">{{m.type}}</h3>
+              <h3 class="card-header">{{movie.type}}</h3>
               <div class="card-body">
-                <h5 class="card-title">{{m.title}}</h5>
-                <h6 class="card-subtitle text-muted">{{m.author}}</h6>
+                <h5 class="card-title">{{movie.title}}</h5>
+                <h6 class="card-subtitle text-muted">{{movie.author}}</h6>
               </div>
               <img style="height: 200px; width: 100%; display: block;" src="https://lorempixel.com/350/200/" alt="Card image">
               <div class="card-body">
-                <p class="card-text">{{m.sumary}}</p>
+                <p class="card-text">{{movie.sumary}}</p>
               </div>
               <div class="card-footer text-muted">
-                <a href="{{ path('single', {'id': m.id}) }}" class="card-link">En savoir plus</a>
+                <a href="{{ path('single', {'id': movie.id}) }}" class="card-link">En savoir plus</a>
               </div>
             </div>
       </div>
