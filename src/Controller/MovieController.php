@@ -5,9 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Movie;
-use App\Entity\Evaluation;
 use App\Repository\MovieRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
@@ -53,33 +51,5 @@ class MovieController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/evaluation/{id}", name="evaluation")
-     * @Isgranted("ROLE_ADMIN")
-     */
-    public function rate(Movie $b, Request $c)
-    {
-        $d = new Evaluation();
 
-        $form = $this->createFormBuilder($d)
-            ->add('comment')
-            ->add('grade')
-            ->add('save', SubmitType::class)
-            ->getForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-          $d.setMovie($b);
-          $d.setUser($u);
-          $entityManager = $this->getDoctrine()->getManager();
-          $entityManager->persist($d);
-          $entityManager->flush();
-        }
-
-        return $this->render('test/evaluation.html.twig', [
-          "b" => $b,
-          "form" => $form->createView()
-        ]);
-    }
 }
