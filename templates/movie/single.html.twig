@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ movie.title }}{% endblock %}
+
+{% block pageTitle %}<h2>{{ movie.title }}</h2>{% endblock %}
+
+{% block main %}
+<div class="row">
+  <div class="col-md-6">
+    <img style="height: 370px; width: 100%; display: block;" src="https://lorempixel.com/540/370/" alt="">
+  </div>
+  <div class="col-md-6">
+    <div class="card border-primary mb-3" >
+      <div class="card-header">{{ movie.type }}</div>
+      <div class="card-body">
+        <h4 class="card-title">{{ movie.title }} </h4>
+        <p class="card-text">{{ movie.sumary }} </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

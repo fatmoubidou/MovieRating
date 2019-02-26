@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
-class TestController extends AbstractController
+class MovieController extends AbstractController
 {
 
 
@@ -43,11 +43,11 @@ class TestController extends AbstractController
     }
 
     /**
-     * @Route("/single/{id}", name="single")
+     * @Route("/single/{id}", name="single", requirements={"id"="\d+"})
      */
-    public function show(Movie $id)
+    public function show($id)
     {
-        $movie = $this->getDoctrine()->getRepository(Movie::class)->findById($id);
+        $movie = $this->getDoctrine()->getRepository(Movie::class)->find($id);
         return $this->render('movie/single.html.twig', [
           "movie" => $movie
         ]);
