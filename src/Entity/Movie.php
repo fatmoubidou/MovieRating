@@ -44,8 +44,13 @@ class Movie
     private $author;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Evaluation", mappedBy="movie")
      */
     private $evaluations;
+
+    /**
+     */
+    //private $average;
 
     public function __construct()
     {
@@ -148,19 +153,18 @@ class Movie
         return $this;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    // VOIR SI C PAS MIEU DE FAIRE UNE MET DANS L'ENTIT POUR RECUPÉRAR LA NOTE MOYENE
+    // Average evaluations calc Method
     public function getAverage() {
-
+      $total = 0;
+      $i = 0;
+      foreach ($this->getEvaluations() as $key => $evaluation) {
+        $i++;
+        $total += $evaluation->getGrade();
+      }
+      return $total / $i;
     }
+
+    // public function setAverage(Movie $movie) {
+    //
+    // }
 }
