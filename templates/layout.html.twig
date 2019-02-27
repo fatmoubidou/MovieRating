@@ -1,15 +1,16 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<div class="jumbotron jumbotron-fluid p-1">
+<div class="bg-light jumbotron-fluid p-1">
   <div class="container">
     <div class="row justify-content-end">
       <div class="col-md-4 text-right">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('account')}}">Mon compte</a> |
           <a href="{{ path('logout')}}">Déconnexion</a>
         {% else %}
         <a href="{{ path('app_login')}}">Connexion</a> |
-        <a href="#">Inscription</a>
+        <a href="{{ path('app_register')}}">Inscription</a>
         {% endif %}
       </div>
     </div>

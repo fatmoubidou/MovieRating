@@ -48,7 +48,7 @@
             </tr>
           </thead>
           <tbody>
-            //3 bests evaluations
+            <!-- 3 bests evaluations -->
             {% for evaluation in movie.evaluations|sortByField('grade', 'desc')|slice(0,3) %}
             <tr>
               <td scope="row">
@@ -61,7 +61,7 @@
             </tr>
             {% endfor %}
 
-            //3 worst evaluations
+            <!-- 3 worst evaluations -->
             {% for evaluation in movie.evaluations|sortByField('grade', 'asc')|slice(0,3) %}
             <tr class="table-danger">
               <td scope="row">

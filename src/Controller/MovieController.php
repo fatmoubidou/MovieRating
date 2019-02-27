@@ -11,24 +11,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class MovieController extends AbstractController
 {
 
-
-    /**
-     * fonction fète pr tester ds trucs
-     * @Route("/test", name="test")
-     */
-    // public function test()
-    // {
-    //     $movies = $this->getDoctrine()->getRepository(Movie::class)->findAll();
-    //     //fonction qui essé de calc moyen note flm mais prblm
-    //     for ($i=0; $i < count($movies) ; $i) {
-    //       $grade = $movies[$i]->getEvaluations()->getGrade();
-    //     }
-    //     return $this->render('movie/index.html.twig', [
-    //       'movies' => $movies,
-    //
-    //     ]);
-    // }
-
     /**
      * @Route("/", name="index")
      */

@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block main %}
+<div class="row">
+      <div class="w-100 d-flex justify-content-between">
+        <h3>Mes évaluations</h3>
+        <h3><i class="fas fa-user"></i> {{user.username}}</h3>
+      </div>
+      <table class="table table-hover ">
+        <thead>
+          <tr>
+            <th scope="col">Film</th>
+            <th scope="col">Note sur 10</th>
+            <th scope="col">Commentaire</th>
+            <th scope="col">Date d'évaluation</th>
+            <th scope="col"><i class="fas fa-edit"></i></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for evaluation in evaluations|sortByField('evalDate', 'desc') %}
+          <tr>
+            <td>{{evaluation.movie.title}}</td>
+            <td scope="row">
+              {% for i  in 1..evaluation.grade %}
+                  <i class="fas fa-star text-warning"></i>
+              {% endfor %}
+            </td>
+            <td>{{evaluation.comment}}</td>
+            <td>{{evaluation.evalDate|date('d/m/Y')}}</td>
+            <td><a href="{{path('evaluationEdit',{'id':evaluation.id})}}"><i class="fas fa-edit"></i></a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+{% endblock %}

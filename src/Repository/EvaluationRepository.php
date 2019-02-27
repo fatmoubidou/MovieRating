@@ -23,15 +23,15 @@ class EvaluationRepository extends ServiceEntityRepository
     //  * @return Evaluation[] Returns an array of Evaluation objects
     //  */
 
-    /*
-    public function findOneBySomeField($value): ?Evaluation
+
+    public function findEvaluationsByUser($value)
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
+            ->andWhere('e.user = :val')
             ->setParameter('val', $value)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-    */
+
 }
