@@ -46,8 +46,6 @@ class MovieController extends AbstractController
     public function show($id)
     {
         $movie = $this->getDoctrine()->getRepository(Movie::class)->find($id);
-        //$evaluations = $this->getDoctrine()->getRepository(Evaluation::class)->findOneBy(['movie'=>$movie]);
-
         return $this->render('movie/single.html.twig', [
           "movie" => $movie
         ]);

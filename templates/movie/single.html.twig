@@ -2,7 +2,14 @@
 
 {% block title %}{{ movie.title }}{% endblock %}
 
-{% block pageTitle %}{{ movie.title }}{% endblock %}
+{% block pageTitle %}
+<div class="row justify-content-between">
+  <h2>{{ movie.title }}</h2>
+  <div class="d-flex align-items-center">
+    <a href="{{path('index')}}" class="btn btn-primary">Retour à la liste</a>
+  </div>
+</div>
+{% endblock %}
 
 {% block main %}
 <div class="row">
@@ -21,17 +28,53 @@
     </ul>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane fade show active" id="home">
-        <p>{{ movie.sumary }}</p>
-        <p>Note moyenne : {{ movie.getAverage() }}</p>
-        <p><a href="{{path('evaluation', {'id': movie.id})}}">Evaluer</a></p>
+        <div class="p-2">
+            <div class="d-flex justify-content-between mb-3">
+              <h5>Note moyenne : {{ movie.getAverage() }}</h5>
+              <div class="">
+                <a href="{{path('evaluation', {'id': movie.id})}}" class="btn btn-info"><i class="fas fa-star-half-alt"></i> Evaluer ce film</a>
+              </div>
+            </div>
+            <p>{{ movie.sumary }}</p>
+        </div>
       </div>
       <div class="tab-pane fade" id="evaluations">
-        <h3>Les évaluations</h3>
-        <ul>
-        {% for evaluation in movie.evaluations %}
-            <li>{{evaluation.grade}}</li>
-        {% endfor %}
-        </ul>
+        <table class="table table-hover ">
+          <thead>
+            <tr>
+              <th scope="col">Note sur 10</th>
+              <th scope="col">Commentaire</th>
+              <th scope="col">Auteur</th>
+            </tr>
+          </thead>
+          <tbody>
+            //3 bests evaluations
+            {% for evaluation in movie.evaluations|sortByField('grade', 'desc')|slice(0,3) %}
+            <tr>
+              <td scope="row">
+                {% for i  in 1..evaluation.grade %}
+                    <i class="fas fa-star text-warning"></i>
+                {% endfor %}
+              </td>
+              <td>{{evaluation.comment}}</td>
+              <td>{{evaluation.user.username}}</td>
+            </tr>
+            {% endfor %}
+
+            //3 worst evaluations
+            {% for evaluation in movie.evaluations|sortByField('grade', 'asc')|slice(0,3) %}
+            <tr class="table-danger">
+              <td scope="row">
+                {% for i  in 1..evaluation.grade %}
+                    <i class="fas fa-star text-warning"></i>
+                {% endfor %}
+              </td>
+              <td>{{evaluation.comment}}</td>
+              <td>{{evaluation.user.username}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
