@@ -11,7 +11,14 @@
   </div>
   <div class="col-md-6">
     <h3></h3>
-    {{ form(form) }}
+    {{ form_start(evaluationForm) }}
+        {{ form_row(evaluationForm.grade) }}
+        {{ form_row(evaluationForm.comment) }}
+        <div class="d-flex justify-content-between">
+          <a class="btn btn-lg btn-primary" href="{{app.request.headers.get('referer')}}">Annuler</a>
+          <button class="btn btn-lg btn-primary">Enregistrer</button>
+        </div>
+    {{ form_end(evaluationForm) }}
   </div>
 </div>
 

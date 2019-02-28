@@ -7,8 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Evaluation;
 use App\Entity\Movie;
 use App\Entity\User;
-use Symfony\Component\Form\Extension\Core\Type\RangeType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use App\Form\EvaluationType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
@@ -25,16 +24,7 @@ class EvaluationController extends AbstractController
     {
         $evaluation = new Evaluation();
 
-        $form = $this->createFormBuilder($evaluation)
-            ->add('comment')
-            ->add('grade', RangeType::class, [
-                                              'attr' => [
-                                                  'min' => 1,
-                                                  'max' => 10
-                                              ]])
-            ->add('save', SubmitType::class)
-            ->getForm();
-
+        $form = $this->createForm(EvaluationType::class, $evaluation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +43,7 @@ class EvaluationController extends AbstractController
 
         return $this->render('movie/evaluation.html.twig', [
           'movie' => $movie,
-          'form' => $form->createView()
+          'evaluationForm' => $form->createView()
         ]);
     }
 
@@ -65,15 +55,7 @@ class EvaluationController extends AbstractController
      */
     public function edit(Evaluation $evaluation, Request $request)
     {
-        $form = $this->createFormBuilder($evaluation)
-            ->add('comment')
-            ->add('grade', RangeType::class, [
-                                              'attr' => [
-                                                  'min' => 1,
-                                                  'max' => 10
-                                              ]])
-            ->add('save', SubmitType::class)
-            ->getForm();
+        $form = $this->createForm(EvaluationType::class, $evaluation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,7 +66,7 @@ class EvaluationController extends AbstractController
         return $this->render('movie/evaluation.html.twig', [
             'evaluation' => $evaluation,
             'movie' => $evaluation->getMovie(),
-            'form' => $form->createView(),
+            'evaluationForm' => $form->createView(),
         ]);
     }
 }

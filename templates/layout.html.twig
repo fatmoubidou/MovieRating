@@ -1,32 +1,48 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<div class="bg-light jumbotron-fluid p-1 mb-3">
-  <div class="container">
-    <div class="row justify-content-end">
-      <div class="col-md-4 text-right">
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a href="{{ path('account')}}">Mon compte</a> |
-          <a href="{{ path('logout')}}">Déconnexion</a>
-        {% else %}
-        <a href="{{ path('app_login')}}">Connexion</a> |
-        <a href="{{ path('app_register')}}">Inscription</a>
-        {% endif %}
+<div class="d-flex flex-column justify-content-between" style="min-height: 100%;">
+  <div class="">
+    <header>
+      <div class="bg-light jumbotron-fluid p-1">
+        <div class="container">
+          <div class="row justify-content-end">
+            <div class="col-md-4 text-right">
+              {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+              <a href="{{ path('account')}}">Mon compte</a> |
+                <a href="{{ path('logout')}}">Déconnexion</a>
+              {% else %}
+              <a href="{{ path('app_login')}}">Connexion</a> |
+              <a href="{{ path('app_register')}}">Inscription</a>
+              {% endif %}
+            </div>
+          </div>
+          <h1 class="display-4"><a href="{{path('index')}}">Movie Rating</a></h1>
+          <p class="lead">Le premier site français pour évaluer les films tout pourris produits par le cinéma français</p>
+        </div>
       </div>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
+        <div class="container">
+          <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{{path('index')}}">Home</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+      {% block pageTitle %}{% endblock %}
+      {% block main %}{% endblock %}
     </div>
-    <h1 class="display-4"><a href="{{path('index')}}">Movie Rating</a></h1>
-    <p class="lead">Le premier site français pour évaluer les films tout pourris produits par le cinéma français</p>
   </div>
-</div>
-
-<div class="container">
-  {% block pageTitle %}{% endblock %}
-  {% block main %}{% endblock %}
-</div>
-
-<div class="jumbotron jumbotron-fluid mb-0">
-  <div class="container">
-    <p class="lead">Si vous êtes un réalisateur français et que vous vous plaigniez des notes attribuées à votre navet, il ne fallait pas produire une telle bouze. XOXO</p>
+  <div class="jumbotron jumbotron-fluid mb-0">
+    <div class="container">
+      <p class="lead">Si vous êtes un réalisateur français et que vous vous plaigniez des notes attribuées à votre navet, il ne fallait pas produire une telle bouze. XOXO</p>
+    </div>
   </div>
 </div>
 {% endblock %}
