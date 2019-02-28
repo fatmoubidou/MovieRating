@@ -6,11 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Entity\Evaluation;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
+
 
 class UserController extends AbstractController
 {
     /**
      * @Route("/account", name="account")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index()
     {

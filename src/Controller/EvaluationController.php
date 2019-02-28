@@ -12,11 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-/**
- * Require ROLE_ADMIN for *every* controller method in this class.
- *
- * @Route("/evaluation")
- */
+
+
 class EvaluationController extends AbstractController
 {
     /**

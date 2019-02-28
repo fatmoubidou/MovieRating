@@ -28,9 +28,11 @@
     </ul>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane fade show active" id="home">
-        <div class="p-2">
+        <div class="pt-3 px-1">
             <div class="d-flex justify-content-between mb-3">
+              {% if movie.getAverage() %}
               <h5>Note moyenne : {{ movie.getAverage() }}</h5>
+              {% endif %}
               <div class="">
                 <a href="{{path('evaluation', {'id': movie.id})}}" class="btn btn-info"><i class="fas fa-star-half-alt"></i> Evaluer ce film</a>
               </div>
@@ -39,6 +41,7 @@
         </div>
       </div>
       <div class="tab-pane fade" id="evaluations">
+        {% if movie.evaluations is not empty %}
         <table class="table table-hover ">
           <thead>
             <tr>
@@ -75,6 +78,7 @@
             {% endfor %}
           </tbody>
         </table>
+        {% endif %}
       </div>
     </div>
   </div>

@@ -161,7 +161,10 @@ class Movie
         $i++;
         $total += $evaluation->getGrade();
       }
-      return $total / $i;
+
+      if($total != 0 && $i != 0) {
+        return $total / $i;
+      }
     }
 
     // public function setAverage(Movie $movie) {
