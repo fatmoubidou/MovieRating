@@ -16,15 +16,18 @@ class EvaluationType extends AbstractType
         $builder
             ->add('comment', TextareaType::class, ['label' => 'Commentaire'])
             ->add('grade', RangeType::class,[
-                  'label' => 'Note de 1 à 10',
-                  'attr' => ['min' => 1,
-                             'max' => 10
-                            ]
+                  'label' => 'Note de 0 à 10',
+                  'attr' => ['min' => Evaluation::MIN_GRADE,
+                             'max' => Evaluation::MAX_GRADE,
+                             'oninput'=>'result.value=parseInt($(\'.range\').value)'
+                           ],
+                  
                   ])
             // ->add('evalDate')
             // ->add('movie')
             // ->add('user')
         ;
+        dump($options);
     }
 
     public function configureOptions(OptionsResolver $resolver)

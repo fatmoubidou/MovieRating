@@ -8,12 +8,12 @@
             <div class="card mb-3">
               <h3 class="card-header">{{movie.type}}</h3>
               <div class="card-body">
-                <h5 class="card-title">{{movie.title}}</h5>
+                <h5 class="card-title">{{movie.title|truncate(20, true, '...')|raw}}</h5>
                 <h6 class="card-subtitle text-muted">{{movie.author}}</h6>
               </div>
               <img style="height: 200px; width: 100%; display: block;" src="https://lorempixel.com/350/200/" alt="Card image">
               <div class="card-body">
-                <p class="card-text">{{movie.sumary}}</p>
+                <p class="card-text">{{movie.sumary|truncate(100, true, '...')|raw}}</p>
               </div>
               <div class="card-footer text-muted text-right">
                 <a href="{{ path('single', {'id': movie.id}) }}" class="card-link">En savoir plus</a>

@@ -17,7 +17,7 @@ class EvaluationController extends AbstractController
 {
     /**
      * @Route("/evaluation/{id}", name="evaluation", requirements={"id"="\d+"})
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      *
      */
     public function rate(Movie $movie, Request $request)
@@ -39,6 +39,7 @@ class EvaluationController extends AbstractController
           $entityManager = $this->getDoctrine()->getManager();
           $entityManager->persist($evaluation);
           $entityManager->flush();
+          return $this->redirectToRoute('single',['id'=>$movie->getId()]);
         }
 
         return $this->render('movie/evaluation.html.twig', [
@@ -50,7 +51,7 @@ class EvaluationController extends AbstractController
 
     /**
      * @Route("/evaluation/{id}/edit", name="evaluationEdit", requirements={"id"="\d+"})
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      *
      */
     public function edit(Evaluation $evaluation, Request $request)

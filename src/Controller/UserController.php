@@ -14,7 +14,7 @@ class UserController extends AbstractController
 {
     /**
      * @Route("/account", name="account")
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_USER")
      */
     public function index()
     {
